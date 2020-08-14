@@ -4,8 +4,8 @@ Some boilerplate code to handle MQTT.
 import paho.mqtt.client as mqtt
 import time
 
-MQTT_Broker = "192.168.137.222"
-MQTT_Port = 1883
+MQTT_Broker = "192.168.1.149"
+MQTT_Port = 8888
 Keep_Alive_Interval = 45
 MQTT_Topic = "camera/image"
 

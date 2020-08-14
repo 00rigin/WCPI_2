@@ -88,7 +88,7 @@ class JotTable:
             
         for i, track in enumerate(tracks):
             if track['id'] == int(send_table[0]):
-                f_cluster_mat = track['f_cluster'].get_clusters_matrix() #f_cluster 의 진짜 모습 두둥!!
+                # f_cluster_mat = track['f_cluster'].get_clusters_matrix() #f_cluster 의 진짜 모습 두둥!!
                 avg_feature = track['avg_feature']
                 send_time = track['timestamps'] #2020811 for send timestamp -JUN
                 # 리스트로 저장시
@@ -96,13 +96,13 @@ class JotTable:
                                 
                 #print("dump sucess")
                 data = {'p_id' : send_table[0],
-                        'f_cluster_mat' : f_cluster_mat.tolist(),
+                        # 'f_cluster_mat' : f_cluster_mat.tolist(),
                         'avg_feature' : avg_feature.tolist(),
                         #'cam_id' : send_table[1],
-                        'cam_id' : 1,
+                        'cam_id' : 0,
                         'start_time1' : send_table[2],
                         'end_time1' : send_table[3],
-                        'pic': self.t_pic[int(send_table[0])].tolist()
+                        'pic': self.t_pic[int(send_table[0])].tolist(),
                         'timestamps' : send_time}
                 """
                 data_cluster = {'p_id' : send_table[0],

@@ -7,11 +7,13 @@ import time
 import queue
 #import cv2 as cv
 # MQTT 설정
-MQTT_Broker = "127.0.0.1"
+MQTT_Broker = "192.168.0.100"
+# MQTT_Broker = "192.168.0.18"
 #MQTT_Broker = "127.0.0.1"
-MQTT_Port = 1883
+# MQTT_Broker = 'localhost'
+MQTT_Port = 8888
 Keep_Alive_Interval = 100
-MQTT_Topic = "camera/cam2"
+MQTT_Topic = "camera/cam1"
 #MQTT_Topic_pi = "camera/cluster"
 #MQTT_Topic_srv = "camera/image"
 mqttc = mqtt.Client()

@@ -147,10 +147,10 @@ class SingleCameraTracker:
         self.time += 1
         
         #20200529 self.tracks 확인용
-        print("********")
-        for t in self.tracks:
-            print("tracks : "+str(t['id']))
-            # print("tracks : "+str(t['timestamps']))
+        # print("********")
+        # for t in self.tracks:
+        #     print("tracks : "+str(t['id']))
+        #     # print("tracks : "+str(t['timestamps']))
 
 
 
@@ -168,13 +168,13 @@ class SingleCameraTracker:
                         #print(add_data)
                         p_id_restored = int(add_data['p_id'])
                         #np.array(json_load['f_cluster_mat'], dtype = np.float32)
-                        f_cluster_mat_restored = np.array(add_data['f_cluster_mat'], dtype = np.float32)
+                        # f_cluster_mat_restored = np.array(add_data['f_cluster_mat'], dtype = np.float32)
                         avg_feature_restored = np.array(add_data['avg_feature'], dtype = np.float32)
                         timestamp_restored = list(add_data['timestamps'])
 
                         #str(data['avg_feature'])
                         #test_ = str(data['start_time1'])
-                        #print("p_id : ", p_id_restored)
+                        print("p_id : ", p_id_restored)
                         #print("f_cluster_mat_restored : ", f_cluster_mat_restored)
                        # print("avg_feature_restored : ", avg_feature_restored[:20])
 
@@ -338,8 +338,8 @@ class SingleCameraTracker:
                         track1['avg_feature'] is not None and track2['avg_feature'] is not None:
 
                         f_avg_dist = cosine(track1['avg_feature'], track2['avg_feature'])
-                        print(track1['id'])
-                        print(track2['id'])
+                        # print(track1['id'])
+                        # print(track2['id'])
                         f_clust_dist = clusters_distance(track1['f_cluster'], track2['f_cluster'])
                         distance_matrix[i, j] = min(f_avg_dist, f_clust_dist)
                 else:
