@@ -3,20 +3,21 @@
 import paho.mqtt.client as mqtt
 import time
 
-MQTT_Broker = "192.168.0.100"
-#MQTT_Broker = "192.168.43.145"
-MQTT_Port = 8888
+MQTT_Broker = "192.168.0.102"
+MQTT_Port = 8889
 Keep_Alive_Interval = 100
-MQTT_Topic = "camera/cam2"
-#MQTT_Topic_pi = "camera/cluster"
-#MQTT_Topic_srv = "camera/image"
+#MQTT_Topic = "camera/cam1"
+#MQTT_Topic_pi = "cluster/cam2"
+MQTT_Topic_pi1 = "cluster/cli2"
+#MQTT_Topic_pi2 = "cluster/cli3"
+MQTT_Topic_srv = "camera/cam2"
 
 def on_connect(client, userdata, flags, rc):
     # print(f"CONNACK received with code {rc}")
     if rc == 0:
         print("connected to MQTT broker")
         client.connected_flag = True  # set flag
-        
+       
     else:
         print("Bad connection to MQTT broker, returned code=", rc)
 
@@ -48,23 +49,21 @@ def publish_msg_srv(client, message):
     #info_clus.wait_for_publish()
     print("finish publish to srv")
 
-def publish_msg_pi(client, message):
+def publish_msg_pi1(client, message):
     cli = client
-    infot = cli.publish(MQTT_Topic_pi,message,0)
+    infot = cli.publish(MQTT_Topic_pi1,message,0)
     infot.wait_for_publish()
-    print("finish publish to pi")
-  
+    print("finish publish to pi1")
+
+def publish_msg_pi2(client, message):
+    cli = client
+    infot = cli.publish(MQTT_Topic_pi2,message,0)
+    infot.wait_for_publish()
+    print("finish publish to pi2")
+
 def publish_msg(client, message):
     cli = client
     infot = cli.publish(MQTT_Topic,message,0)
     #infot = cli.publish.multiple(message,MQTT_Broker)
     infot.wait_for_publish()
     print("finish publish")
-
-"""    
-with open("pi_jot.json",encoding='utf-16') as f:
-        cluster_data = json.load(f)
-        #print(cluster_data)
-        cluster_f = cluster_data["f_cluster_mat"]
-        print(cluster_f)
-"""
