@@ -10,14 +10,20 @@ from collections import OrderedDict
 import codecs
 
 class MultiCameraTracker:
+
+
     def __init__(self, num_sources, reid_model,
                  sct_config={},
                  time_window=20,
                  global_match_thresh=0.35
                  ):
+
+        with open('config.json', 'r') as f:
+            config = json.load(f)
+
         self.scts = []
         self.time = 0
-        self.last_global_id = 100
+        self.last_global_id = config['DEFAULT']['START_ID']
         self.global_ids_queue = queue.Queue()
         self.time_window = time_window  # should be greater than time window in scts
         self.global_match_thresh = global_match_thresh

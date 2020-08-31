@@ -1,16 +1,21 @@
 # Reqired callbacks
 
 import paho.mqtt.client as mqtt
+import json
 import time
 
-MQTT_Broker = "192.168.0.102"
-MQTT_Port = 8889
+with open('config.json', 'r') as f:
+        config = json.load(f)
+
+MQTT_Broker = config['DEFAULT']['IP_ADD']
+MQTT_Port = config['DEFAULT']['PORT_NUM']
 Keep_Alive_Interval = 100
 #MQTT_Topic = "camera/cam1"
 #MQTT_Topic_pi = "cluster/cam2"
-MQTT_Topic_pi1 = "cluster/cli2"
+cli_num = str(config['DEFAULT']['CAM_ID'] + 1)
+MQTT_Topic_pi1 = "cluster/cli" + cli_num
 #MQTT_Topic_pi2 = "cluster/cli3"
-MQTT_Topic_srv = "camera/cam2"
+MQTT_Topic_srv = "camera/cam" + cli_num
 
 def on_connect(client, userdata, flags, rc):
     # print(f"CONNACK received with code {rc}")

@@ -33,6 +33,17 @@ class MulticamCapture:
             for video_path in sources:
                 log.info('Opening file {}'.format(video_path))
                 cap = cv.VideoCapture(video_path)
+
+                # ##20200831 비디오테스트용
+                # cap.set(cv.CAP_PROP_FRAME_WIDTH, 640)
+                # cap.set(cv.CAP_PROP_FRAME_HEIGHT, 480)
+                # # MTRIAD 쓸때
+                # #cap.set(cv.CAP_PROP_FRAME_WIDTH, 320)
+                # #cap.set(cv.CAP_PROP_FRAME_HEIGHT, 240)
+                # cap.set(cv.CAP_PROP_FPS, 30)
+                # cap.set(cv.CAP_PROP_FOURCC, cv.VideoWriter_fourcc(*'MJPG'))
+                # ### 까지
+
                 assert cap.isOpened()
                 self.captures.append(cap)
 

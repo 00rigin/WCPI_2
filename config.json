@@ -1,8 +1,15 @@
-// config.json for communication & synchronization
 
 {
+    "DEFAULT": {
+      "START_ID": 0,
+      "CAM_ID": 0,
+      "IP_ADD": "192.168.0.102",
+      "PORT_NUM": 8889,
+      "ACCESS_KEY": "AKIAWX6I5TPNM5KSG5KD",
+      "SECRET_KEY": "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",
+      "REGION" : "ap-northeast-2",
+      "BUCKET_NAME" : "edgeserv"
 
-    "DEFAULT"
 
-
-}
+    }
+  }

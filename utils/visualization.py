@@ -40,6 +40,6 @@ def visualize_multicam_detections(frames, all_objects, fps='', date=''):
     label_size, base_line = cv.getTextSize(str(fps),
                                            cv.FONT_HERSHEY_SIMPLEX, 1, 2)
     cv.putText(vis, str(fps), (base_line*2, base_line*3),
-               cv.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 0), 2)
+               cv.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2)
     cv.putText(vis, str(date), (base_line*10,base_line*3), cv.FONT_HERSHEY_SIMPLEX, 1, (255,255,255), 2)
     return vis

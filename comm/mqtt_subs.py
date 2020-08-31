@@ -6,17 +6,21 @@ import numpy as np
 import time
 import queue
 import threading
+
+with open('config.json', 'r') as f:
+        config = json.load(f)
+
 #import cv2 as cv
 # MQTT 설정
 #MQTT_Broker = "223.194.33.80"
-MQTT_Broker = "192.168.0.102"
-MQTT_Port = 8889
+#MQTT_Broker = "192.168.0.102"
+MQTT_Broker = config['DEFAULT']['IP_ADD']
+MQTT_Port = config['DEFAULT']['PORT_NUM']
 Keep_Alive_Interval = 100
 #MQTT_Topic = "camera/cam2"
 #MQTT_Topic_pi = "cluster/#"
 MQTT_Topic_pi = "cluster/#"
-# MQTT_Topic_pi2 = "cluster/cli3"
-MQTT_Topic_srv = "camera/cam2"
+
 mqttc = mqtt.Client()
 
 array = []
