@@ -13,13 +13,13 @@ def draw_detections(frame, detections):
         box_color = COLOR_PALETTE[id % len(COLOR_PALETTE)]
         
         cv.rectangle(frame, (left, top), (right, bottom),
-                     box_color, thickness=3)
+                     box_color, thickness=2)
         
-        label_size, base_line = cv.getTextSize(label, cv.FONT_HERSHEY_SIMPLEX, 1, 2)
+        label_size, base_line = cv.getTextSize(label, cv.FONT_HERSHEY_SIMPLEX, 0.7, 2)
         top = max(top, label_size[1])
         cv.rectangle(frame, (left, top - label_size[1]), (left + label_size[0], top + base_line),
                      (255, 255, 255), cv.FILLED)
-        cv.putText(frame, label, (left, top), cv.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 0), 2)
+        cv.putText(frame, label, (left, top), cv.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 0), 2)
         
       
 
@@ -40,6 +40,6 @@ def visualize_multicam_detections(frames, all_objects, fps='', date=''):
     label_size, base_line = cv.getTextSize(str(fps),
                                            cv.FONT_HERSHEY_SIMPLEX, 1, 2)
     cv.putText(vis, str(fps), (base_line*2, base_line*3),
-               cv.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2)
-    cv.putText(vis, str(date), (base_line*10,base_line*3), cv.FONT_HERSHEY_SIMPLEX, 1, (255,255,255), 2)
+               cv.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 0), 2)
+    cv.putText(vis, str(date), (base_line*10,base_line*3), cv.FONT_HERSHEY_SIMPLEX, 0.7, (0,0,0), 2)
     return vis

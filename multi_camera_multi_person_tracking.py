@@ -112,7 +112,9 @@ def run(params, capture, detector, reid, jot): #params : args 임
 
         #시간 처리
         dates = datetime.now()
-        vis = visualize_multicam_detections(frames, tracked_objects, fps, dates)
+        ###20200901
+        vis_ = visualize_multicam_detections(frames, tracked_objects, fps, dates)
+        vis = cv.resize(vis_,dsize=(0,0), fx=2.0, fy = 2.0, interpolation=cv.INTER_LINEAR)
         if not params.no_show:
             cv.imshow(win_name, vis)
             if cv.waitKey(1) == 27:
@@ -150,8 +152,8 @@ def main():
     parser.add_argument('--config', type=str, default='config.py', required=False)
     parser.add_argument('--history_file', type=str, default='', required=False)
 
-    parser.add_argument('-d', '--device', type=str, default='CPU')
-    #parser.add_argument('-d', '--device', type=str, default='MYRIAD')
+    #parser.add_argument('-d', '--device', type=str, default='CPU')
+    parser.add_argument('-d', '--device', type=str, default='MYRIAD')
     parser.add_argument('-l', '--cpu_extension',
                         help='MKLDNN (CPU)-targeted custom layers.Absolute \
                               path to a shared library with the kernels impl.',
