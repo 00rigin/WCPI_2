@@ -1,15 +1,12 @@
-
 {
     "DEFAULT": {
       "START_ID": 100,
       "CAM_ID": 1,
-      "IP_ADD": "192.168.0.4",
+      "IP_ADD": "192.168.0.102",
       "PORT_NUM": 8889,
-      "ACCESS_KEY": "AKIAZ27DA5JKORKTHQMP",
-      "SECRET_KEY": "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",
+      "ACCESS_KEY": "AKIAIYSSPNEJXL7ZKGRA",
+      "SECRET_KEY": "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",
       "REGION" : "ap-northeast-2",
       "BUCKET_NAME" : "edgeserv2"
-
-
     }
   }

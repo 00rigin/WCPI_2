@@ -18,6 +18,7 @@ import math
 import comm.mqtt_pub as mp
 import comm.mqtt_subs as ms
 #from comm.send import SEND
+log.getLogger('boto3').setLevel(log.CRITICAL)
 with open('config.json', 'r') as f:
     config = json.load(f)
 
@@ -72,27 +73,21 @@ class JotTable:
                 self.t_table[i] = [-1,-1,-1,-1,-1] # if 통과 못하게 초기화 시킴
                 #temp_t_1 = float(str(send_table[2]))
                 #temp_t_2 = float(str(send_table[3]))
-                print(send_table[2]) #27-Aug-2020 143618,
-                print(send_table[3])
+
                 temp_t_1_b = send_table[2].split(' ')[1].split(':')
                 temp_t_2_b = send_table[3].split(' ')[1].split(':')
-                print(temp_t_1_b)
-                print(temp_t_2_b)
+
                 temp_t_1 = 120*int(temp_t_1_b[0]) + 60*int(temp_t_1_b[1]) + int(temp_t_1_b[2])
                 temp_t_2 = 120*int(temp_t_2_b[0]) + 60*int(temp_t_2_b[1]) + int(temp_t_2_b[2])
-                print("ddd : ",temp_t_1)
-                print("ddd : ",temp_t_2)
-                #print((temp_t_2 - temp_t_1))
+             
                 if((temp_t_2 - temp_t_1) >= self.th_hold):
                     print("ID "+ str(send_table[0]) + " are detected!!!")
                     #print(temp_t_2 - temp_t_1)
                     self.table_file(send_table,tracks_data)
-                    print(temp_t_2 - temp_t_1)
                     #self.send_to_pi(send, send_table, tracks_data)
                     #self.send_to_srv(send, send_table,frames)
                 else:
                     print("ID "+ str(send_table[0]) + " are exist too small time")
-                    print(temp_t_2 - temp_t_1)
     """
     def convertImagetoBase64(self,_img_file):
         with open(_img_file,"rb") as image_file:
@@ -106,10 +101,12 @@ class JotTable:
         except Exception as e:
             print(e)
     def upload_img_to_aws(self,data,name):
-        s3 = boto3.client('s3', aws_access_key_id=ACCESS_KEY, aws_secret_access_key=SECRET_KEY)
+        #s3 = boto3.client('s3', aws_access_key_id=ACCESS_KEY, aws_secret_access_key=SECRET_KEY)
         try:
             data_serial = cv.imencode('.png', data)[1].tostring()
             s3_resource.Bucket(bucket_name).put_object(Key=name, Body=data_serial, ContentType='image/png', ACL='public-read')
+            log.getLogger('boto3').setLevel(log.CRITICAL)
+            log.getLogger('botocore').setLevel(log.CRITICAL)
             print("upload successful")
             return True
         except Exception as e:
@@ -127,7 +124,6 @@ class JotTable:
                 send_time = track['timestamps'] #2020811 for send timestamp -JUN
                 #리스트로 저장시
                 #print(type(f_cluster_mat), type(avg_feature))
-                #print("dump sucess")
                 """
                 data = {'p_id' : send_table[0],
                         #'f_cluster_mat' : f_cluster_mat.tolist(),

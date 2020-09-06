@@ -43,49 +43,18 @@ def on_connect(mosq, obj, rc):
 def on_message(mosq, obj, msg):
    print("MQTT Data Received...")
    print("MQTT Topic: " + msg.topic )
-   #q.put(("{'" + str(msg.payload) + "'}"))
-   #print(q.get())
    
-   #print("Data: " + str(msg.payload.decode("utf-8")))
    data = msg.payload.decode("utf-8")
    json_load = json.loads(data)
    array.append(json_load)
-   #pic_restored = np.array(json_load['pic'], dtype=np.uint8)
-   #p_id_restored = int(json_load['p_id'])
-   #cam_id_restored = int(json_load['cam_id'])
-   #s_time_restored = str(json_load['start_time1'])
-   #e_time_restored = str(json_load['end_time1'])
    
-   # 20200603 data that sending to pi
-   #f_cluster_mat_restored = np.array(json_load['f_cluster_mat'], dtype = np.float32)
-   #avg_feature_restored = np.array(json_load['avg_feature'], dtype = np.float32)
-   
-   #print("p_id : ", p_id_restored)
-   #print("cam_id : ", cam_id_restored)
-   #print("s_time : ", s_time_restored)
-   #print("e_time : ", e_time_restored)
-   #cv.imshow("restored", pic_restored)
-   
-   #print("******************************")
-   #print("f_cluster_mat_restored : ", f_cluster_mat_restored)
-   #print("avg_feature_restored : ", avg_feature_restored)
 
-
-
-   
 def on_disconnect(client, userdata, flags, rc=0):
     print(str(rc))
 
 def on_subscribe(mosq, obj, mid, granted_qos):
    print("subscribed:" +str(mid) + " "+ str(granted_qos))
    
-"""
-def subscribing():
-    mqttc.on_message = on_message
-    mqttc.loop_start()
-
-def main():
-"""
 
 #mqttc = mqtt.Client()
 #mqttc.connect(MQTT_Broker, int(MQTT_Port), int(Keep_Alive_Interval))
