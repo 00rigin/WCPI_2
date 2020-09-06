@@ -18,10 +18,11 @@ import math
 import comm.mqtt_pub as mp
 import comm.mqtt_subs as ms
 #from comm.send import SEND
-log.getLogger('boto3').setLevel(log.CRITICAL)
 with open('config.json', 'r') as f:
     config = json.load(f)
-
+log.getLogger('boto3').setLevel(log.CRITICAL)
+log.getLogger('botocore').setLevel(log.CRITICAL)
+log.getLogger('urllib3').setLevel(log.CRITICAL)
 ACCESS_KEY = config['DEFAULT']['ACCESS_KEY']
 SECRET_KEY = config['DEFAULT']['SECRET_KEY']
 region = config['DEFAULT']['REGION']
@@ -101,12 +102,11 @@ class JotTable:
         except Exception as e:
             print(e)
     def upload_img_to_aws(self,data,name):
-        #s3 = boto3.client('s3', aws_access_key_id=ACCESS_KEY, aws_secret_access_key=SECRET_KEY)
+        s3 = boto3.client('s3', aws_access_key_id=ACCESS_KEY, aws_secret_access_key=SECRET_KEY)
         try:
             data_serial = cv.imencode('.png', data)[1].tostring()
             s3_resource.Bucket(bucket_name).put_object(Key=name, Body=data_serial, ContentType='image/png', ACL='public-read')
-            log.getLogger('boto3').setLevel(log.CRITICAL)
-            log.getLogger('botocore').setLevel(log.CRITICAL)
+            
             print("upload successful")
             return True
         except Exception as e:
